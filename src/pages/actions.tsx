@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, memo } from 'react';
-import { Job } from '@/types/job';
+import { Job } from '@/types/employee';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/lib/auth';
 

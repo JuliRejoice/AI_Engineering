@@ -12,6 +12,9 @@ import Actions from '@/pages/actions';
 import Projects from '@/pages/projects';
 import Employees from '@/pages/employees';
 import Settings from '@/pages/settings';
+import RepositoryDetail from "@/pages/RepositoryDetail";
+import CommitDetail from "@/pages/CommitDetail";
+import EmployeeDashboard from "@/pages/EmployeeDashboard";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
@@ -72,6 +75,12 @@ function App() {
             }
           />
         </Routes>
+        <Routes>
+        <Route path="/" element={<EmployeeDashboard />} />
+        {/* <Route path="/repository/:repoName" element={<RepositoryDetail />} />
+        <Route path="/commit/:commitId" element={<CommitDetail />} />
+        <Route path="*" element={<Navigate to="/" replace />} /> */}
+      </Routes>
         {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
         <Toaster />
       </Suspense>

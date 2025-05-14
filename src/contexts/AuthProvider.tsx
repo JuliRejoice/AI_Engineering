@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import { AuthContext } from "@/lib/auth";
-import { BDEUser } from "@/types/job";
+import { BDEUser } from "@/types/employee";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -18,7 +18,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchBdeProfile(session.user.id);
+        // fetchBdeProfile(session.user.id);
       }
     };
 
@@ -29,7 +29,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchBdeProfile(session.user.id);
+        // fetchBdeProfile(session.user.id);
       } else {
         setBdeProfile(null);
       }
@@ -38,16 +38,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const fetchBdeProfile = async (userId: string) => {
-    const { data } = await supabase
-      .from("bde_profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
+  // const fetchBdeProfile = async (userId: string) => {
+  //   const { data } = await supabase
+  //     .from("bde_profiles")
+  //     .select("*")
+  //     .eq("id", userId)
+  //     .single();
 
-    setBdeProfile(data);
-    setLoading(false);
-  };
+  //   setBdeProfile(data);
+  //   setLoading(false);
+  // };
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({
@@ -65,7 +65,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   if (loading) {
     return <LoadingSpinner />;
   }
-
+  // const user={
+  //   id:1,
+  // /   email:'test@gmail.com'
+  // } as any;/
   return (
     <AuthContext.Provider value={{ user, bdeProfile, signIn, signOut }}>
       {children}

@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import { Job } from "@/types/job";
+import { Job } from "@/types/employee";
 
 export async function sendSlackAlert(jobData: Job,type = 1): Promise<void> {
   const job_id = jobData.jobid ?? 'Unknown';
